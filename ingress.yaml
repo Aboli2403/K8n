@@ -2,8 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: hello-world-ingress
+  namespace: default
 spec:
+  ingressClassName: nginx  #class
   rules:
+  - host: hello-world.local
   - http:
       paths:
       - path: /
@@ -12,5 +15,5 @@ spec:
           service:
             name: hello-world
             port:
-              number: 8080
+              number: 80
 
