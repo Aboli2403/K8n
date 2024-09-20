@@ -40,7 +40,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube`
 
 4. **Install Kubectl**: `sudo snap install kubectl --classic` 
 
- 5. **Install Helm**: `curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash` 
+5. **Install Helm**: `curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash` 
 
 ## Kubernetes Cluster with Minikube
 
@@ -78,17 +78,25 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube`
  2. **Genrate tls Certificate**:`openssl req -new -x509 -key tls.key -out tls.crt -days 365 -subj "/CN=hello-world.local"` This command creates a certificate valid for 365 days and specifies the hello-world.local domain as the Common Name (CN).
 ### Create a Kubernetes Secret to Store the TLS Certificate
  1. **Create a secret with the TLS key and certificate**:`kubectl create secret tls hello-world-tls --key tls.key --cert tls.crt` 
- 5. **Changing Ingress YAML (`ingress.yaml`) yaml**: 
- 6. **Apply Ingress with TLS**:`kubectl apply -f ingress-tls.yaml` 
+ 2. **Changing Ingress YAML (`ingress.yaml`) yaml**:
+      - TLS Section: This specifies the domain `(hello-world.local)` and the associated secret `(hello-world-tls)`, which contains the TLS certificate and key.
+      - Annotations: The `nginx.ingress.kubernetes.io/ssl-redirect: "true"`annotation ensures that any HTTP requests are automatically redirected to HTTPS.
+      - Backend Service: The backend service is configured to listen on `port 80`, which means it will handle the traffic after the TLS termination at the Ingress.
+
+ 4. **Apply Ingress with TLS**:`kubectl apply -f ingress-tls.yaml`
 
 ### Refrance:
 `https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/`
 `https://helm.sh/docs/intro/install/`
 `https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-helm/`
 
-**Ansible: 
+**Ansible**: 
 `https://docs.ansible.com/ansible/4/collections/community/kubernetes/k8s_module.html`
 `https://docs.ansible.com/ansible/2.9/modules/helm_module.html`
+
+**TLS**: 
+`https://kubernetes.github.io/ingress-nginx/examples/tls-termination/`
+`https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/`
 
 
 
