@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-world
+  name: hello-world-deployment
 spec:
   replicas: 1
   selector:
@@ -14,18 +14,19 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: k8s.gcr.io/echoserver:1.10 #nginxdemos/hello #existing Image
+        image: nginxdemos/hello #existing Image
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-world
+  name: hello-world-service
 spec:
   type: ClusterIP
   ports:
   - port: 80
+    targetPort: 80
   selector:
     app: hello-world
         
