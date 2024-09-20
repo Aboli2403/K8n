@@ -78,7 +78,12 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube`
  2. **TLS Ingress YAML (`ingress-tls.yaml`) yaml**: 
  3. **Apply Ingress with TLS**:`kubectl apply -f ingress-tls.yaml` 
 
-### Refrance: `https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/`
+### Refrance: 
+`https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/`
+`https://helm.sh/docs/intro/install/`
+`https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-helm/`
+
+
 
 
 
