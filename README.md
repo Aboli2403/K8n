@@ -62,7 +62,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube`
 
  3. **Create Ingress YAML (`ingress.yaml`) yaml**:'
 
- 4. **Apply Ingress**:`kubectl apply -f ingress.yaml` 
+ 4. **Apply Ingress**:`kubectl apply -f ingress.yaml` `http://192.168.49.2:30835/` 
 
 ## Automate with Ansible 
 
