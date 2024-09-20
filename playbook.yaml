@@ -1,6 +1,7 @@
 ---
 - name: Deploy Hello World Application on Kubernetes
   hosts: localhost
+  connection: local
   tasks:
     - name: Check if Nginx Ingress is installed
       shell: helm list --filter nginx-ingress --namespace default
@@ -16,12 +17,12 @@
       ignore_errors: yes
 
     - name: Apply Kubernetes Deployment
-      shell: kubectl apply -f ~/k8/deployment.yaml
+      shell: kubectl apply -f ~/Projectk8/deployment.yaml
       args:
-        chdir: ~/k8
+        chdir: ~/Projectk8
 
     - name: Apply Kubernetes Ingress
-      shell: kubectl apply -f ~/k8/ingress.yaml
+      shell: kubectl apply -f ~/Projectk8/ingress.yaml
       args:
-        chdir: ~/k8
+        chdir: ~/Projectk8
 
