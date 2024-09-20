@@ -74,14 +74,18 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube`
 
 ## TLS Setup with Self-Signed Certificate  
 
- 1. **Genrate tls Certificate**:`openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=your-domain.com/O=your-domain" kubectl create secret tls hello-world-tls --key tls.key --cert tls.crt` 
- 2. **TLS Ingress YAML (`ingress-tls.yaml`) yaml**: 
- 3. **Apply Ingress with TLS**:`kubectl apply -f ingress-tls.yaml` 
+ 1. **Generate a private key**: `openssl genrsa -out tls.key 2048`
+ 2. **Genrate tls Certificate**:`openssl req -new -x509 -key tls.key -out tls.crt -days 365 -subj "/CN=hello-world.local"` This command creates a certificate valid for 365 days and specifies the hello-world.local domain as the Common Name (CN).
+### Create a Kubernetes Secret to Store the TLS Certificate
+ 1. **Create a secret with the TLS key and certificate**:`kubectl create secret tls hello-world-tls --key tls.key --cert tls.crt` 
+ 5. **Changing Ingress YAML (`ingress.yaml`) yaml**: 
+ 6. **Apply Ingress with TLS**:`kubectl apply -f ingress-tls.yaml` 
 
 ### Refrance:
 `https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/`
 `https://helm.sh/docs/intro/install/`
 `https://docs.nginx.com/nginx-ingress-controller/installation/installing-nic/installation-with-helm/`
+
 **Ansible: 
 `https://docs.ansible.com/ansible/4/collections/community/kubernetes/k8s_module.html`
 `https://docs.ansible.com/ansible/2.9/modules/helm_module.html`
